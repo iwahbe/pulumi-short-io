@@ -82,6 +82,10 @@ func (*Link) Create(ctx p.Context, name string, input LinkArgs, preview bool) (s
 		return "", LinkState{}, err
 	}
 
+	if code := res.StatusCode; code != 201 {
+		return "", LinkState{}, fmt.Errorf(res.Status)
+	}
+
 	return name, LinkState{
 		LinkArgs: input,
 		IdString: result["idString"].(string),
