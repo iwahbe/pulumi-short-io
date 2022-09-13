@@ -1,4 +1,4 @@
-import * as short from "@pulumi/short-io/pulumi-short-io";
+import * as short from "@pulumi/short-io";
 
 new short.Link("link", {
   domain: "rawkode.link",

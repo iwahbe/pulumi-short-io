@@ -14,9 +14,8 @@
     },
     "files": [
         "index.ts",
+        "link.ts",
         "provider.ts",
-        "pulumi-short-io/index.ts",
-        "pulumi-short-io/link.ts",
         "utilities.ts"
     ]
 }

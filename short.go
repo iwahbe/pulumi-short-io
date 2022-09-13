@@ -17,14 +17,21 @@ const VERSION = "0.1.0"
 func Provider() p.Provider {
 	return infer.NewProvider().WithResources(
 		infer.Resource[*Link, LinkArgs, LinkState](),
-	).WithConfig(infer.Config[*Config]()).
+	).
+		WithConfig(infer.Config[*Config]()).
 		WithModuleMap(map[tokens.ModuleName]tokens.ModuleName{
-			"short": "index",
+			"pulumi-short-io": "index",
+		}).
+		WithLanguageMap(map[string]any{
+			"nodejs": map[string]bool{
+				"respectSchemaVersion": true,
+			},
 		})
 }
 
 type Config struct {
-	Token string `pulumi:"token"`
+	Token   string `pulumi:"token"`
+	Version string `pulumi:"version"`
 }
 
 func (c *Config) Annotate(a infer.Annotator) {

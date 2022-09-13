@@ -5,14 +5,24 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export * from "./link";
 export * from "./provider";
 
-// Export sub-modules:
-import * as pulumi-short-io from "./pulumi-short-io";
+// Import resources to register:
+import { Link } from "./link";
 
-export {
-    pulumi-short-io,
+const _module = {
+    version: utilities.getVersion(),
+    construct: (name: string, type: string, urn: string): pulumi.Resource => {
+        switch (type) {
+            case "short-io:index:Link":
+                return new Link(name, <any>undefined, { urn })
+            default:
+                throw new Error(`unknown resource type ${type}`);
+        }
+    },
 };
+pulumi.runtime.registerResourceModule("short-io", "index", _module)
 
 import { Provider } from "./provider";
 

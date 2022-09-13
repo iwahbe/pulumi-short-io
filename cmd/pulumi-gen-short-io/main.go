@@ -86,7 +86,8 @@ func sdkCmd() *cobra.Command {
 			default:
 				endIf(fmt.Errorf("unrecognized language: %q", language))
 			}
-			spec, err := p.GetSchema(context.Background(), NAME, "", short.Provider())
+			spec, err := p.GetSchema(context.Background(),
+				NAME, short.VERSION, short.Provider())
 			endIf(err)
 			pkg, err := pschema.ImportSpec(spec, nil)
 			endIf(err)
